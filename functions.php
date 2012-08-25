@@ -242,7 +242,7 @@ function news_get_current_comments_page() {
  */
 function news_comment_form_defaults( $args ) {
 
-	$args['label_submit'] = esc_attr__( 'Submit', hybrid_get_textdomain() );
+	$args['label_submit'] = esc_attr__( 'Submit', 'news' );
 
 	return $args;
 }
@@ -353,7 +353,7 @@ function news_get_post_by_meta( $meta_key = '', $meta_value = '' ) {
  */
 function news_register_post_types() {
 
-	$domain = hybrid_get_textdomain();
+	$domain = 'news';
 	$prefix = hybrid_get_prefix();
 
 	/* Labels for the video post type. */

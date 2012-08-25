@@ -26,7 +26,7 @@ if ( is_active_sidebar( 'feature' ) ) : ?>
 
 			<div class="widget-inside">
 
-				<h3 class="widget-title"><?php _e( 'Top Articles', hybrid_get_textdomain() ); ?></h3>
+				<h3 class="widget-title"><?php _e( 'Top Articles', 'news' ); ?></h3>
 
 				<?php $loop = new WP_Query( array( 'meta_key' => 'Views', 'orderby' => 'meta_value', 'monthnum' => date( 'm' ), 'posts_per_page' => 3 ) ); ?>
 
@@ -49,7 +49,7 @@ if ( is_active_sidebar( 'feature' ) ) : ?>
 				<?php $view_more = news_get_post_by_meta( '_wp_page_template', 'page-template-popular.php' ); ?>
 
 				<?php if ( !empty( $view_more ) ) { ?>
-					<a class="view-more" href="<?php echo get_permalink( $view_more ); ?>" title="<?php esc_attr_e( 'View more popular posts', hybrid_get_textdomain() ); ?>"><?php _e( 'View More', hybrid_get_textdomain() ); ?></a>
+					<a class="view-more" href="<?php echo get_permalink( $view_more ); ?>" title="<?php esc_attr_e( 'View more popular posts', 'news' ); ?>"><?php _e( 'View More', 'news' ); ?></a>
 				<?php } ?>
 
 			</div><!-- .widget-inside -->

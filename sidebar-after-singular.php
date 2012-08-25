@@ -35,8 +35,8 @@ if ( is_active_sidebar( 'after-singular' ) ) : ?>
 			<div class="ui-tabs-wrap">
 
 				<ul class="ui-tabs-nav">
-					<li><a href="#singular-post-tabs-1"><?php _e( 'Related Stories', hybrid_get_textdomain() ); ?></a></li>
-					<li><a href="#singular-post-tabs-2"><?php _e( 'Most Popular', hybrid_get_textdomain() ); ?></a></li>
+					<li><a href="#singular-post-tabs-1"><?php _e( 'Related Stories', 'news' ); ?></a></li>
+					<li><a href="#singular-post-tabs-2"><?php _e( 'Most Popular', 'news' ); ?></a></li>
 				</ul><!-- .ui-tabs-nav -->
 
 				<div id="singular-post-tabs-1" class="ui-tabs-panel">

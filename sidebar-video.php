@@ -27,8 +27,8 @@ if ( is_active_sidebar( 'video' ) ) : ?>
 			<div class="ui-tabs-wrap">
 
 				<ul class="ui-tabs-nav">
-					<li><a href="#video-tabs-1"><?php _e( 'Recent', hybrid_get_textdomain() ); ?></a></li>
-					<li><a href="#video-tabs-2"><?php _e( 'Popular', hybrid_get_textdomain() ); ?></a></li>
+					<li><a href="#video-tabs-1"><?php _e( 'Recent', 'news' ); ?></a></li>
+					<li><a href="#video-tabs-2"><?php _e( 'Popular', 'news' ); ?></a></li>
 				</ul><!-- .ui-tabs-nav -->
 
 				<div id="video-tabs-1" class="ui-tabs-panel">

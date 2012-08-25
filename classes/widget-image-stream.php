@@ -21,7 +21,7 @@ class News_Widget_Image_Stream extends WP_Widget {
 	 */
 	function News_Widget_Image_Stream() {
 		$this->prefix = hybrid_get_prefix();
-		$this->textdomain = hybrid_get_textdomain();
+		$this->textdomain = 'news';
 
 		$widget_ops = array( 'classname' => 'image-stream', 'description' => __( 'Displays image thumbnails in a gallery-like format.', $this->textdomain ) );
 		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => "{$this->prefix}-image-stream" );

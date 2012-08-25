@@ -25,7 +25,7 @@ get_header(); ?>
 					<?php the_content(); ?>
 				</div><!-- .entry-content -->
 
-				<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '<span class="share">Share this on:</span> [entry-mixx-link] [entry-delicious-link] [entry-digg-link] [entry-facebook-link] [entry-twitter-link] [entry-email-link] [entry-popup-shortlink]', hybrid_get_textdomain() ) . '</div>' ); ?>
+				<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '<span class="share">Share this on:</span> [entry-mixx-link] [entry-delicious-link] [entry-digg-link] [entry-facebook-link] [entry-twitter-link] [entry-email-link] [entry-popup-shortlink]', 'news' ) . '</div>' ); ?>
 
 				<?php do_atomic( 'close_entry' ); // Close entry hook ?>
 

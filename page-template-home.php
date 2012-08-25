@@ -57,8 +57,8 @@ get_header(); ?>
 			<div class="slideshow-controls">
 				<div class="slideshow-pager"></div>
 				<div class="slideshow-nav">
-					<a class="slider-prev"><?php _e( 'Previous', hybrid_get_textdomain() ); ?></a>
-					<a class="slider-next"><?php _e( 'Next', hybrid_get_textdomain() ); ?></a>
+					<a class="slider-prev"><?php _e( 'Previous', 'news' ); ?></a>
+					<a class="slider-next"><?php _e( 'Next', 'news' ); ?></a>
 				</div>
 			</div><!-- .slideshow-controls -->
 
@@ -158,7 +158,7 @@ get_header(); ?>
 
 				<div class="section-wrap">
 
-				<h2 class="section-title"><?php _e( 'More Articles', hybrid_get_textdomain() ); ?></h2>
+				<h2 class="section-title"><?php _e( 'More Articles', 'news' ); ?></h2>
 
 				<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 

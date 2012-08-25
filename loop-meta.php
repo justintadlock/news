@@ -71,7 +71,7 @@
 
 			<div class="loop-description">
 				<p>
-				<?php printf( __( 'You are browsing the search results for &quot;%1$s&quot;', hybrid_get_textdomain() ), esc_attr( get_search_query() ) ); ?>
+				<?php printf( __( 'You are browsing the search results for &quot;%1$s&quot;', 'news' ), esc_attr( get_search_query() ) ); ?>
 				</p>
 			</div><!-- .loop-description -->
 
@@ -80,11 +80,11 @@
 	<?php elseif ( is_date() ) : ?>
 
 		<div class="loop-meta">
-			<h1 class="loop-title"><?php _e( 'Archives by date', hybrid_get_textdomain() ); ?></h1>
+			<h1 class="loop-title"><?php _e( 'Archives by date', 'news' ); ?></h1>
 
 			<div class="loop-description">
 				<p>
-				<?php _e( 'You are browsing the site archives by date.', hybrid_get_textdomain() ); ?>
+				<?php _e( 'You are browsing the site archives by date.', 'news' ); ?>
 				</p>
 			</div><!-- .loop-description -->
 
@@ -94,11 +94,11 @@
 
 		<div class="loop-meta">
 
-			<h1 class="loop-title"><?php _e( 'Archives', hybrid_get_textdomain() ); ?></h1>
+			<h1 class="loop-title"><?php _e( 'Archives', 'news' ); ?></h1>
 
 			<div class="loop-description">
 				<p>
-				<?php _e( 'You are browsing the site archives.', hybrid_get_textdomain() ); ?>
+				<?php _e( 'You are browsing the site archives.', 'news' ); ?>
 				</p>
 			</div><!-- .loop-description -->
 
@@ -108,11 +108,11 @@
 
 		<div class="loop-meta">
 
-			<h1 class="loop-title"><?php _e( 'Most Popular', hybrid_get_textdomain() ); ?></h1>
+			<h1 class="loop-title"><?php _e( 'Most Popular', 'news' ); ?></h1>
 
 			<div class="loop-description">
 				<p>
-				<?php _e( 'You are browsing the site archives by popularity.', hybrid_get_textdomain() ); ?>
+				<?php _e( 'You are browsing the site archives by popularity.', 'news' ); ?>
 				</p>
 			</div><!-- .loop-description -->
 

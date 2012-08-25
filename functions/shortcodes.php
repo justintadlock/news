@@ -35,8 +35,8 @@ function news_entry_shortlink_popup_shortcode() {
 		return '';
 
 	$id = 'shortlink-' . get_the_ID();
-	$title = sprintf( __( "Shortlink for '%s'", hybrid_get_textdomain() ), get_the_title() );
-	$out = '<a class="tips shortlink hide-if-no-js" rel="#' . $id . '" title="' . esc_attr( $title ) . '">' . __( 'Shortlink', hybrid_get_textdomain() ) . '</a>';
+	$title = sprintf( __( "Shortlink for '%s'", 'news' ), get_the_title() );
+	$out = '<a class="tips shortlink hide-if-no-js" rel="#' . $id . '" title="' . esc_attr( $title ) . '">' . __( 'Shortlink', 'news' ) . '</a>';
 	$out .= ' <div id="' . $id . '" class="tip hide">';
 	$out .= '<input type="text" value="' . esc_url( $shortlink ) . '" onclick="this.focus(); this.select();" />';
 	$out .= '</div>';
@@ -50,7 +50,7 @@ function news_entry_shortlink_popup_shortcode() {
  * @since 0.1.0
  */
 function news_entry_print_link_shortcode() {
-	return '<a class="print-link hide-if-no-js" href="#">' . __( 'Print', hybrid_get_textdomain() ) . '</a>';
+	return '<a class="print-link hide-if-no-js" href="#">' . __( 'Print', 'news' ) . '</a>';
 }
 
 /**
@@ -60,8 +60,8 @@ function news_entry_print_link_shortcode() {
  */
 function news_entry_email_link_shortcode() {
 	$subject = urlencode( esc_attr( '[' . get_bloginfo( 'name' ) . ']' . the_title_attribute( 'echo=0' ) ) );
-	$body = urlencode( esc_attr( sprintf( __( 'Check out this post: %1$s', hybrid_get_textdomain() ), get_permalink( get_the_ID() ) ) ) );
-	return '<a class="email-link" href="mailto:?subject=' . $subject . '&amp;body=' . $body . '">' . __( 'Email', hybrid_get_textdomain() ) . '</a>';
+	$body = urlencode( esc_attr( sprintf( __( 'Check out this post: %1$s', 'news' ), get_permalink( get_the_ID() ) ) ) );
+	return '<a class="email-link" href="mailto:?subject=' . $subject . '&amp;body=' . $body . '">' . __( 'Email', 'news' ) . '</a>';
 }
 
 /**
@@ -70,7 +70,7 @@ function news_entry_email_link_shortcode() {
  * @since 0.1.0
  */
 function news_entry_mixx_link_shortcode() {
-	return '<a href="http://www.mixx.com" onclick="window.location=\'http://www.mixx.com/submit?page_url=\'+window.location; return false;">' . __( 'Mixx', hybrid_get_textdomain() ) . '</a>';
+	return '<a href="http://www.mixx.com" onclick="window.location=\'http://www.mixx.com/submit?page_url=\'+window.location; return false;">' . __( 'Mixx', 'news' ) . '</a>';
 }
 
 /**
@@ -79,7 +79,7 @@ function news_entry_mixx_link_shortcode() {
  * @since 0.1.0
  */
 function news_entry_delicious_link_shortcode() {
-	return '<a href="http://delicious.com/save" onclick="window.open(\'http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url=\'+encodeURIComponent(\'' . get_permalink() . '\')+\'&amp;title=\'+encodeURIComponent(\'' . the_title_attribute( 'echo=0' ) . '\'),\'delicious\', \'toolbar=no,width=550,height=550\'); return false;">' . __( 'Delicious', hybrid_get_textdomain() ) . '</a>';
+	return '<a href="http://delicious.com/save" onclick="window.open(\'http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url=\'+encodeURIComponent(\'' . get_permalink() . '\')+\'&amp;title=\'+encodeURIComponent(\'' . the_title_attribute( 'echo=0' ) . '\'),\'delicious\', \'toolbar=no,width=550,height=550\'); return false;">' . __( 'Delicious', 'news' ) . '</a>';
 }
 
 /**
@@ -91,7 +91,7 @@ function news_entry_delicious_link_shortcode() {
 function news_entry_digg_link_shortcode() {
 	$url =  esc_url( 'http://digg.com/submit?phase=2&amp;url=' . urlencode( get_permalink( get_the_ID() ) ) . '&amp;title="' . urlencode( the_title_attribute( 'echo=0' ) ) );
 
-	return '<a href="' . $url . '" title="' . __( 'Digg this entry', hybrid_get_textdomain() ) . '">Digg</a>';
+	return '<a href="' . $url . '" title="' . __( 'Digg this entry', 'news' ) . '">Digg</a>';
 }
 
 /**
@@ -104,7 +104,7 @@ function news_entry_digg_link_shortcode() {
 function news_entry_facebook_link_shortcode() {
 	$url = esc_url( 'http://facebook.com/sharer.php?u=' . urlencode( get_permalink( get_the_ID() ) ) . '&amp;t=' . urlencode( the_title_attribute( 'echo=0' ) ) );
 
-	return '<a href="' . $url . '" title="' . __( 'Share this entry on Facebook', hybrid_get_textdomain() ) . '">' . __( 'Facebook', hybrid_get_textdomain() ) . '</a>';
+	return '<a href="' . $url . '" title="' . __( 'Share this entry on Facebook', 'news' ) . '">' . __( 'Facebook', 'news' ) . '</a>';
 }
 
 /**
@@ -123,8 +123,8 @@ function news_entry_twitter_link_shortcode() {
 	else
 		$shortlink = get_permalink( $post_id );
 
-	$url = esc_url( 'http://twitter.com/home?status=' . urlencode( sprintf( __( 'Currently reading %1$s', hybrid_get_textdomain() ), $shortlink ) ) );
-	return '<a href="' . $url . '" title="' . __( 'Share this entry on Twitter', hybrid_get_textdomain() ) . '">' . __( 'Twitter', hybrid_get_textdomain() ) . '</a>';
+	$url = esc_url( 'http://twitter.com/home?status=' . urlencode( sprintf( __( 'Currently reading %1$s', 'news' ), $shortlink ) ) );
+	return '<a href="' . $url . '" title="' . __( 'Share this entry on Twitter', 'news' ) . '">' . __( 'Twitter', 'news' ) . '</a>';
 }
 
 /**
@@ -199,7 +199,7 @@ function news_slideshow_shortcode( $attr ) {
 
 		if ( !empty( $caption ) ) {
 			$slideshow .= '<div class="slideshow-caption">';
-			$slideshow .= '<a class="slideshow-caption-control">' . __( 'Caption', hybrid_get_textdomain() ) . '</a>';
+			$slideshow .= '<a class="slideshow-caption-control">' . __( 'Caption', 'news' ) . '</a>';
 			$slideshow .= '<div class="slideshow-caption-text">' . $caption . '</div>';
 			$slideshow .= '</div>';
 		}
@@ -211,8 +211,8 @@ function news_slideshow_shortcode( $attr ) {
 
 		$slideshow .= '<div class="slideshow-pager"></div>';
 		$slideshow .= '<div class="slideshow-nav">';
-			$slideshow .= '<a class="slider-prev">' . __( 'Previous', hybrid_get_textdomain() ) . '</a>';
-			$slideshow .= '<a class="slider-next">' . __( 'Next', hybrid_get_textdomain() ) . '</a>';
+			$slideshow .= '<a class="slider-prev">' . __( 'Previous', 'news' ) . '</a>';
+			$slideshow .= '<a class="slider-next">' . __( 'Next', 'news' ) . '</a>';
 		$slideshow .= '</div>';
 
 	$slideshow .= '</div>';

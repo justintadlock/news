@@ -22,7 +22,7 @@ class News_Widget_Popular_Tabs extends WP_Widget {
 	 */
 	function News_Widget_Popular_Tabs() {
 		$this->prefix = hybrid_get_prefix();
-		$this->textdomain = hybrid_get_textdomain();
+		$this->textdomain = 'news';
 
 		$widget_ops = array( 'classname' => 'popular-tabs', 'description' => __( 'Displays popular posts by number of views and comments in tab format.', $this->textdomain ) );
 		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => "{$this->prefix}-popular-tabs" );

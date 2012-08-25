@@ -65,4 +65,4 @@
 
 			<?php do_atomic( 'open_container' ); // Open container hook ?>
 
-			<?php if ( current_theme_supports( 'breadcrumb-trail' ) ) breadcrumb_trail( array( 'before' => __( 'Browsing:', hybrid_get_textdomain() ) . ' <span class="sep">/</span>' ) ); ?>
+			<?php if ( current_theme_supports( 'breadcrumb-trail' ) ) breadcrumb_trail( array( 'before' => __( 'Browsing:', 'news' ) . ' <span class="sep">/</span>' ) ); ?>

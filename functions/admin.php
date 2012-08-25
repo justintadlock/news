@@ -58,7 +58,7 @@ function news_validate_theme_settings( $settings ) {
  * @since 0.1.0
  */
 function news_create_settings_meta_boxes() {
-	add_meta_box( "news-home-template-meta-box", __( 'Home Page Template Settings', hybrid_get_textdomain() ), 'news_home_template_theme_meta_box', 'appearance_page_theme-settings', 'normal', 'low' );
+	add_meta_box( "news-home-template-meta-box", __( 'Home Page Template Settings', 'news' ), 'news_home_template_theme_meta_box', 'appearance_page_theme-settings', 'normal', 'low' );
  }
 
 /**
@@ -78,15 +78,15 @@ function news_home_template_theme_meta_box() {
 	<table class="form-table">
 
 		<tr>
-			<th><?php _e( 'About:', hybrid_get_textdomain() ); ?></th>
+			<th><?php _e( 'About:', 'news' ); ?></th>
 			<td>
-				<?php _e( 'Settings used on pages that use the "Home" page template.  This template must be assigned to a page before its settings take effect.', hybrid_get_textdomain() ); ?>
+				<?php _e( 'Settings used on pages that use the "Home" page template.  This template must be assigned to a page before its settings take effect.', 'news' ); ?>
 			</td>
 		</tr>
 		<tr>
-			<th><label for="<?php echo hybrid_settings_field_id( 'home_template_categories' ); ?>"><?php _e( 'Category Highlight:', hybrid_get_textdomain() ); ?></label></th>
+			<th><label for="<?php echo hybrid_settings_field_id( 'home_template_categories' ); ?>"><?php _e( 'Category Highlight:', 'news' ); ?></label></th>
 			<td>
-				<label for="<?php echo hybrid_settings_field_id( 'home_template_categories' ); ?>"><?php _e( 'Categories to show blog posts from in the category highlight section.  Multiple categories may be chosen by holding the <code>Ctrl</code> key and selecting.', hybrid_get_textdomain() ); ?></label>
+				<label for="<?php echo hybrid_settings_field_id( 'home_template_categories' ); ?>"><?php _e( 'Categories to show blog posts from in the category highlight section.  Multiple categories may be chosen by holding the <code>Ctrl</code> key and selecting.', 'news' ); ?></label>
 				<br />
 				<select id="<?php echo hybrid_settings_field_id( 'home_template_categories' ); ?>" name="<?php echo hybrid_settings_field_name( 'home_template_categories' ); ?>[]" multiple="multiple" style="height:150px;">
 				<?php foreach( $categories as $cat ) { ?>
