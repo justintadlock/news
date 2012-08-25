@@ -10,7 +10,7 @@
 
 	global $search_num;
 	++$search_num;
-	$search_id = if ( $search_num ) ? esc_attr( '-' . $search_num ) : '';
+	$search_id = ( $search_num ) ? esc_attr( '-' . $search_num ) : '';
 ?>
 			<div id="search<?php echo $search_id; ?>" class="search">
 
