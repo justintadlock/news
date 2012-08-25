@@ -72,6 +72,7 @@ function news_theme_setup() {
 	add_theme_support( 'get-the-image' );
 	add_theme_support( 'entry-views' );
 	add_theme_support( 'breadcrumb-trail' );
+	add_theme_support( 'cleaner-gallery' );
 
 	/* Register shortcodes. */
 	add_action( 'init', 'news_register_shortcodes' );
