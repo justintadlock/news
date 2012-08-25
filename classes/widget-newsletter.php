@@ -4,40 +4,57 @@
  *
  * Provides a subscribe form for integration with the Google/Feedburner service.
  *
- * @since 0.1.0
- *
  * @package News
  * @subpackage Classes
+ * @since 0.1.0
  */
 
 class News_Widget_Newsletter extends WP_Widget {
 
-	var $prefix;
-
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
-	 * @since 0.1.0
+	 *
+	 * @since 0.3.0
 	 */
-	function News_Widget_Newsletter() {
-		$this->prefix = hybrid_get_prefix();
+	function __construct() {
 
-		$widget_ops = array( 'classname' => 'newsletter', 'description' => __( 'Displays a subscription form for your Google/Feedburner account.', 'news' ) );
-		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => "{$this->prefix}-newsletter" );
-		$this->WP_Widget( "{$this->prefix}-newsletter", __( 'News: Newsletter', 'news' ), $widget_ops, $control_ops );
+		/* Set up the widget options. */
+		$widget_options = array(
+			'classname' => 'newsletter',
+			'description' => esc_html__( 'Displays a subscription form for your Google/Feedburner account.', 'news' )
+		);
+
+		/* Set up the widget control options. */
+		$control_options = array(
+			'width' => 200,
+			'height' => 350
+		);
+
+		/* Create the widget. */
+		$this->WP_Widget(
+			'news-newsletter',				// $this->id_base
+			__( 'News: Newsletter', 'news' ),	// $this->name
+			$widget_options,				// $this->widget_options
+			$control_options				// $this->control_options
+		);
 	}
 
 	/**
 	 * Outputs the widget based on the arguments input through the widget controls.
+	 *
 	 * @since 0.1.0
 	 */
-	function widget( $args, $instance ) {
-		extract( $args );
+	function widget( $sidebar, $instance ) {
+		extract( $sidebar );
 
+		/* Output the theme's $before_widget wrapper. */
 		echo $before_widget;
 
-		if ( $instance['title'] )
-			echo $before_title . apply_filters( 'widget_title', $instance['title'] ) . $after_title; ?>
+		/* If a title was input by the user, display it. */
+		if ( !empty( $instance['title'] ) )
+			echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
 
+		?>
 		<div class="newsletter-wrap">
 		<form action="http://feedburner.google.com/fb/a/mailverify" method="post">
 		<p>
@@ -49,15 +66,16 @@ class News_Widget_Newsletter extends WP_Widget {
 		</form>
 		</div><?php
 
+		/* Close the theme's widget wrapper. */
 		echo $after_widget;
 	}
 
 	/**
 	 * Updates the widget control options for the particular instance of the widget.
+	 *
 	 * @since 0.1.0
 	 */
 	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
 
 		$instance = $new_instance;
 
@@ -71,17 +89,20 @@ class News_Widget_Newsletter extends WP_Widget {
 
 	/**
 	 * Displays the widget control options in the Widgets admin screen.
+	 *
 	 * @since 0.1.0
 	 */
 	function form( $instance ) {
 
-		//Defaults
+		/* Set up the default form values. */
 		$defaults = array(
-			'title' => __( 'Newsletter', 'news' ),
-			'input_text' => __( 'you@site.com', 'news' ),
-			'submit_text' => __( 'Subscribe', 'news' ),
-			'id' => ''
+			'title' => 			esc_attr__( 'Newsletter', 'news' ),
+			'input_text' => 		esc_attr__( 'you@site.com', 'news' ),
+			'submit_text' => 	esc_attr__( 'Subscribe', 'news' ),
+			'id' => 			''
 		);
+
+		/* Merge the user-selected arguments with the defaults. */
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<div class="hybrid-widget-controls columns-1">

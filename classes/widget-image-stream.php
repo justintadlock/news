@@ -4,45 +4,66 @@
  *
  * Pulls post thumbnails by category or tag.
  *
- * @since 0.1.0
- *
  * @package News
  * @subpackage Classes
+ * @since 0.1.0
  */
 
 class News_Widget_Image_Stream extends WP_Widget {
 
-	var $prefix;
-
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
-	 * @since 0.1.0
+	 *
+	 * @since 0.3.0
 	 */
-	function News_Widget_Image_Stream() {
-		$this->prefix = hybrid_get_prefix();
+	function __construct() {
 
-		$widget_ops = array( 'classname' => 'image-stream', 'description' => __( 'Displays image thumbnails in a gallery-like format.', 'news' ) );
-		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => "{$this->prefix}-image-stream" );
-		$this->WP_Widget( "{$this->prefix}-image-stream", __( 'News: Image Stream', 'news' ), $widget_ops, $control_ops );
+		/* Set up the widget options. */
+		$widget_options = array(
+			'classname' => 'image-stream',
+			'description' => esc_html__( 'Displays image thumbnails in a gallery-like format.', 'news' )
+		);
+
+		/* Set up the widget control options. */
+		$control_options = array(
+			'width' => 200,
+			'height' => 350
+		);
+
+		/* Create the widget. */
+		$this->WP_Widget(
+			'news-image-stream',				// $this->id_base
+			__( 'News: Image Stream', 'news' ),	// $this->name
+			$widget_options,				// $this->widget_options
+			$control_options				// $this->control_options
+		);
 	}
 
 	/**
 	 * Outputs the widget based on the arguments input through the widget controls.
+	 *
 	 * @since 0.1.0
 	 */
-	function widget( $args, $instance ) {
-		extract( $args );
+	function widget( $sidebar, $instance ) {
+		extract( $sidebar );
 
-		$args = array();
-
-		$posts_per_page = intval( $instance['posts_per_page'] );
-
+		/* Output the theme's $before_widget wrapper. */
 		echo $before_widget;
 
-		if ( $instance['title'] )
-			echo $before_title . apply_filters( 'widget_title', $instance['title'] ) . $after_title;
+		/* If a title was input by the user, display it. */
+		if ( !empty( $instance['title'] ) )
+			echo $before_title . apply_filters( 'widget_title',  $instance['title'], $instance, $this->id_base ) . $after_title;
 
-		$loop = new WP_Query( array( 'post_type' => 'attachment', 'post_mime_type' => 'image', 'post_status' => 'inherit', 'posts_per_page' => $posts_per_page, 'orderby' => 'parent' ) );
+		/* Query images. */
+		$loop = new WP_Query( 
+			array( 
+				'post_type' => 'attachment', 
+				'post_mime_type' => 'image', 
+				'post_status' => 'inherit', 
+				'posts_per_page' => intval( $instance['posts_per_page'] ), 
+				'orderby' => 'parent' 
+			) 
+		);
 
 		echo '<div>';
 
@@ -52,7 +73,7 @@ class News_Widget_Image_Stream extends WP_Widget {
 
 				$loop->the_post();
 
-				get_the_image( array( 'size' => 'thumbnail' ) );
+				echo wp_get_attachment_link(  get_the_ID(), 'thumbnail', true );
 			}
 		} else {
 			echo '<p>' . __( 'There are currently no images found.', 'news' ) . '</p>';
@@ -60,15 +81,16 @@ class News_Widget_Image_Stream extends WP_Widget {
 
 		echo '</div>';
 
+		/* Close the theme's widget wrapper. */
 		echo $after_widget;
 	}
 
 	/**
 	 * Updates the widget control options for the particular instance of the widget.
+	 *
 	 * @since 0.1.0
 	 */
 	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
 
 		$instance = $new_instance;
 
@@ -80,15 +102,18 @@ class News_Widget_Image_Stream extends WP_Widget {
 
 	/**
 	 * Displays the widget control options in the Widgets admin screen.
+	 *
 	 * @since 0.1.0
 	 */
 	function form( $instance ) {
 
-		//Defaults
+		/* Set up the default form values. */
 		$defaults = array(
-			'title' => __( 'Image Stream', 'news' ),
+			'title' => esc_attr__( 'Image Stream', 'news' ),
 			'posts_per_page' => 6,
 		);
+
+		/* Merge the user-selected arguments with the defaults. */
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<div class="hybrid-widget-controls columns-1">
