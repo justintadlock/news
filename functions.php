@@ -22,7 +22,8 @@
  * @subpackage Functions
  * @version 0.3.0
  * @author Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2010 - 2012, Justin Tadlock
+ * @author Tung Do <ttsondo@gmail.com>
+ * @copyright Copyright (c) 2010 - 2012
  * @link http://themehybrid.com/themes/news
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
