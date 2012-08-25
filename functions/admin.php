@@ -23,21 +23,6 @@ function news_admin_setup() {
 
 	/* Validate theme settings. */
 	add_filter( "sanitize_option_{$prefix}_theme_settings", 'news_validate_theme_settings' );
-
-	/* Flush rewrite rules for custom post types. */
-	add_action( 'load-themes.php', 'news_flush_rewrite_rules' );
-}
-
-/**
- * Flushes the rewrite rules on theme activation so that custom post type permalinks work correctly.
- *
- * @since 0.1.0
- */
-function news_flush_rewrite_rules() {
-	global $pagenow, $wp_rewrite;
-
-	if ( 'themes.php' == $pagenow && isset( $_GET['activated'] ) )
-		$wp_rewrite->flush_rules();
 }
 
 /**

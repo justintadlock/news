@@ -342,6 +342,10 @@ function news_get_post_by_meta( $meta_key = '', $meta_value = '' ) {
 	return false;
 }
 
+/* == Functions removed in version 0.3 == */
+
+function news_flush_rewrite_rules() {}
+
 /* == Functions removed in version 0.2 == */
 
 function news_get_header_sidebar() {}
