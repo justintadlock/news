@@ -20,7 +20,7 @@ get_header(); ?>
 		
 			<?php get_template_part( 'loop-meta' ); // Get the loop meta box ?>
 
-			<?php $wp_query = new WP_Query( array( 'ignore_sticky_posts' => true, 'meta_key' => 'Views', 'orderby' => 'meta_value', 'posts_per_page' => get_option( 'posts_per_page' ), 'paged' => ( get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1 ) ) ); ?>
+			<?php $wp_query = new WP_Query( array( 'ignore_sticky_posts' => true, 'meta_key' => 'Views', 'orderby' => 'meta_value_num', 'posts_per_page' => get_option( 'posts_per_page' ), 'paged' => ( get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1 ) ) ); ?>
 
 			<?php if ( $wp_query->have_posts() ) : ?>
 
