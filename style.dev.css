@@ -149,7 +149,7 @@ blockquote {
 **************************************/
 
 /* Entry Images */
-.entry-content img {max-width: 100%;}
+.entry-content img {max-width: 100%; height: auto;}
 .entry-content p img {padding-top:7px;}
 
 /* Thumbnails */
@@ -170,15 +170,18 @@ blockquote {
 	margin-top: 20px;
 	}
 .wp-caption img {
+	max-width: 550px;
 	padding: 4px;
 	border: 1px solid #e5e5e5;
 	box-shadow: 2px #f7f7f7;
 	}
 .wp-caption .wp-caption-text {
+	margin-top: -5px;
 	padding: 0 20px;
 	font-size: 11px;
 	line-height: 18px;
-	color: #333;
+	color: #666;
+	text-align: center;
 	}
 
 /* Tables */
