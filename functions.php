@@ -72,9 +72,6 @@ function news_theme_setup() {
 	add_theme_support( 'entry-views' );
 	add_theme_support( 'breadcrumb-trail' );
 
-	/* Register custom post types. */
-	add_action( 'init', 'news_register_post_types' );
-
 	/* Register shortcodes. */
 	add_action( 'init', 'news_register_shortcodes' );
 
@@ -343,79 +340,6 @@ function news_get_post_by_meta( $meta_key = '', $meta_value = '' ) {
 		return $post_id;
 
 	return false;
-}
-
-/**
- * Registers custom post types for the theme.  We're registering the Video and Slideshow post types.
- *
- * Important!  This will be removed in a future version and placed in an external plugin.
- *
- * @since 0.1.0
- */
-function news_register_post_types() {
-
-	$domain = 'news';
-	$prefix = hybrid_get_prefix();
-
-	/* Labels for the video post type. */
-	$video_labels = array(
-		'name' => __( 'Videos', $domain ),
-		'singular_name' => __( 'Video', $domain ),
-		'add_new' => __( 'Add New', $domain ),
-		'add_new_item' => __( 'Add New Video', $domain ),
-		'edit' => __( 'Edit', $domain ),
-		'edit_item' => __( 'Edit Video', $domain ),
-		'new_item' => __( 'New Video', $domain ),
-		'view' => __( 'View Video', $domain ),
-		'view_item' => __( 'View Video', $domain ),
-		'search_items' => __( 'Search Videos', $domain ),
-		'not_found' => __( 'No videos found', $domain ),
-		'not_found_in_trash' => __( 'No videos found in Trash', $domain ),
-	);
-
-	/* Arguments for the video post type. */
-	$video_args = array(
-		'labels' => $video_labels,
-		'capability_type' => 'post',
-		'public' => true,
-		'can_export' => true,
-		'query_var' => true,
-		'rewrite' => array( 'slug' => 'videos', 'with_front' => false ),
-		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'comments', 'trackbacks', "{$prefix}-post-settings", 'entry-views' ),
-	);
-
-	/* Labels for the slideshow post type. */
-	$slideshow_labels = array(
-		'name' => __( 'Slideshows', $domain ),
-		'singular_name' => __( 'Slideshow', $domain ),
-		'add_new' => __( 'Add New', $domain ),
-		'add_new_item' => __( 'Add New Slideshow', $domain ),
-		'edit' => __( 'Edit', $domain ),
-		'edit_item' => __( 'Edit Slideshow', $domain ),
-		'new_item' => __( 'New Slideshow', $domain ),
-		'view' => __( 'View Slideshow', $domain ),
-		'view_item' => __( 'View Slideshow', $domain ),
-		'search_items' => __( 'Search Slideshows', $domain ),
-		'not_found' => __( 'No slideshows found', $domain ),
-		'not_found_in_trash' => __( 'No slideshows found in Trash', $domain ),
-	);
-
-	/* Arguments for the slideshow post type. */
-	$slideshow_args = array(
-		'labels' => $slideshow_labels,
-		'capability_type' => 'post',
-		'public' => true,
-		'can_export' => true,
-		'query_var' => true,
-		'rewrite' => array( 'slug' => 'slideshows', 'with_front' => false ),
-		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'comments', 'trackbacks', "{$prefix}-post-settings", 'entry-views' ),
-	);
-
-	/* Register the video post type. */
-	register_post_type( apply_filters( 'news_video_post_type', 'video' ), apply_filters( 'news_video_post_type_args', $video_args ) );
-
-	/* Register the slideshow post type. */
-	register_post_type( apply_filters( 'news_slideshow_post_type', 'slideshow' ), apply_filters( 'news_slideshow_post_type_args', $slideshow_args ) );
 }
 
 /* == Functions removed in version 0.2 == */
