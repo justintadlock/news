@@ -177,7 +177,7 @@ function news_enqueue_script() {
 function news_nav_menu_add_items( $menu, $args ) {
 
 	if ( 'secondary' == $args->theme_location ) {
-		$links = '<li class="loginout">' . wp_loginout( site_url( esc_url( $_SERVER['REQUEST_URI'] ) ), false ) . '</li>';
+		$links = '<li class="loginout">' . wp_loginout( home_url( esc_url( $_SERVER['REQUEST_URI'] ) ), false ) . '</li>';
 		$menu = str_replace( '</ul></div>', $links . '</ul></div>', $menu );
 	}
 
