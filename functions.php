@@ -21,9 +21,9 @@
  * @package News
  * @subpackage Functions
  * @version 0.3.0
- * @author DevPress <contact@devpress.com>
- * @copyright Copyright (c) 2010 - 2011, DevPress LLC.
- * @link http://devpress.com/themes/news
+ * @author Justin Tadlock <justin@justintadlock.com>
+ * @copyright Copyright (c) 2010 - 2012, Justin Tadlock
+ * @link http://themehybrid.com/themes/news
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
