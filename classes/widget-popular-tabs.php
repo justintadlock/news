@@ -14,7 +14,6 @@
 class News_Widget_Popular_Tabs extends WP_Widget {
 
 	var $prefix;
-	var $textdomain;
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -22,11 +21,10 @@ class News_Widget_Popular_Tabs extends WP_Widget {
 	 */
 	function News_Widget_Popular_Tabs() {
 		$this->prefix = hybrid_get_prefix();
-		$this->textdomain = 'news';
 
-		$widget_ops = array( 'classname' => 'popular-tabs', 'description' => __( 'Displays popular posts by number of views and comments in tab format.', $this->textdomain ) );
+		$widget_ops = array( 'classname' => 'popular-tabs', 'description' => __( 'Displays popular posts by number of views and comments in tab format.', 'news' ) );
 		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => "{$this->prefix}-popular-tabs" );
-		$this->WP_Widget( "{$this->prefix}-popular-tabs", __( 'News: Popular Tabs', $this->textdomain ), $widget_ops, $control_ops );
+		$this->WP_Widget( "{$this->prefix}-popular-tabs", __( 'News: Popular Tabs', 'news' ), $widget_ops, $control_ops );
 	}
 
 	/**
@@ -68,7 +66,7 @@ class News_Widget_Popular_Tabs extends WP_Widget {
 
 						<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 							<?php the_title( '<li><a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '">', '</a>' ); ?>
-							<span class="count view-count"><?php printf( __( '(%1$s)', $this->textdomain ), get_post_meta( get_the_ID(), 'Views', true ) ); ?></span>
+							<span class="count view-count"><?php printf( __( '(%1$s)', 'news' ), get_post_meta( get_the_ID(), 'Views', true ) ); ?></span>
 							</li>
 						<?php endwhile; ?>
 
@@ -88,7 +86,7 @@ class News_Widget_Popular_Tabs extends WP_Widget {
 
 						<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
 							<?php the_title( '<li><a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '">', '</a>' ); ?>
-							<span class="count view-count"><?php printf( __( '(%1$s)', $this->textdomain ), get_comments_number() ); ?></span>
+							<span class="count view-count"><?php printf( __( '(%1$s)', 'news' ), get_comments_number() ); ?></span>
 							</li>
 						<?php endwhile; wp_reset_query(); ?>
 
@@ -131,21 +129,21 @@ class News_Widget_Popular_Tabs extends WP_Widget {
 
 		//Defaults
 		$defaults = array(
-			'title' => __( 'Most', $this->textdomain ),
+			'title' => __( 'Most', 'news' ),
 			'posts_per_page' => 3,
 			'post_type' => 'post',
-			'views_tab_title' => __( 'Viewed', $this->textdomain ),
-			'comments_tab_title' => __( 'Commented', $this->textdomain )
+			'views_tab_title' => __( 'Viewed', 'news' ),
+			'comments_tab_title' => __( 'Commented', 'news' )
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<div class="hybrid-widget-controls columns-1">
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><?php _e( 'Post Type:', 'news' ); ?></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
 			<?php foreach ( get_post_types( array( 'publicly_queryable' => true ), 'objects' ) as $post_type ) {
 				if ( post_type_supports( $post_type->name, 'entry-views' ) ) { ?>
@@ -155,15 +153,15 @@ class News_Widget_Popular_Tabs extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo esc_attr( $instance['posts_per_page'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'views_tab_title' ); ?>"><?php _e( 'Views Tab Title:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'views_tab_title' ); ?>"><?php _e( 'Views Tab Title:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'views_tab_title' ); ?>" name="<?php echo $this->get_field_name( 'views_tab_title' ); ?>" value="<?php echo esc_attr( $instance['views_tab_title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'comments_tab_title' ); ?>"><?php _e( 'Comments Tab Title:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'comments_tab_title' ); ?>"><?php _e( 'Comments Tab Title:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'comments_tab_title' ); ?>" name="<?php echo $this->get_field_name( 'comments_tab_title' ); ?>" value="<?php echo esc_attr( $instance['comments_tab_title'] ); ?>" />
 		</p>
 		</div>

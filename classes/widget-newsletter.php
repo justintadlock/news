@@ -13,7 +13,6 @@
 class News_Widget_Newsletter extends WP_Widget {
 
 	var $prefix;
-	var $textdomain;
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -21,11 +20,10 @@ class News_Widget_Newsletter extends WP_Widget {
 	 */
 	function News_Widget_Newsletter() {
 		$this->prefix = hybrid_get_prefix();
-		$this->textdomain = 'news';
 
-		$widget_ops = array( 'classname' => 'newsletter', 'description' => __( 'Displays a subscription form for your Google/Feedburner account.', $this->textdomain ) );
+		$widget_ops = array( 'classname' => 'newsletter', 'description' => __( 'Displays a subscription form for your Google/Feedburner account.', 'news' ) );
 		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => "{$this->prefix}-newsletter" );
-		$this->WP_Widget( "{$this->prefix}-newsletter", __( 'News: Newsletter', $this->textdomain ), $widget_ops, $control_ops );
+		$this->WP_Widget( "{$this->prefix}-newsletter", __( 'News: Newsletter', 'news' ), $widget_ops, $control_ops );
 	}
 
 	/**
@@ -79,28 +77,28 @@ class News_Widget_Newsletter extends WP_Widget {
 
 		//Defaults
 		$defaults = array(
-			'title' => __( 'Newsletter', $this->textdomain ),
-			'input_text' => __( 'you@site.com', $this->textdomain ),
-			'submit_text' => __( 'Subscribe', $this->textdomain ),
+			'title' => __( 'Newsletter', 'news' ),
+			'input_text' => __( 'you@site.com', 'news' ),
+			'submit_text' => __( 'Subscribe', 'news' ),
 			'id' => ''
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<div class="hybrid-widget-controls columns-1">
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'id' ); ?>"><?php _e( 'Google/Feedburner ID:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'id' ); ?>"><?php _e( 'Google/Feedburner ID:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'id' ); ?>" name="<?php echo $this->get_field_name( 'id' ); ?>" value="<?php echo esc_attr( $instance['id'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'input_text' ); ?>"><?php _e( 'Input Text:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'input_text' ); ?>"><?php _e( 'Input Text:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'input_text' ); ?>" name="<?php echo $this->get_field_name( 'input_text' ); ?>" value="<?php echo esc_attr( $instance['input_text'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'submit_text' ); ?>"><?php _e( 'Submit Text:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'submit_text' ); ?>"><?php _e( 'Submit Text:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'submit_text' ); ?>" name="<?php echo $this->get_field_name( 'submit_text' ); ?>" value="<?php echo esc_attr( $instance['submit_text'] ); ?>" />
 		</p>
 		</div>

@@ -13,7 +13,6 @@
 class News_Widget_Image_Stream extends WP_Widget {
 
 	var $prefix;
-	var $textdomain;
 
 	/**
 	 * Set up the widget's unique name, ID, class, description, and other options.
@@ -21,11 +20,10 @@ class News_Widget_Image_Stream extends WP_Widget {
 	 */
 	function News_Widget_Image_Stream() {
 		$this->prefix = hybrid_get_prefix();
-		$this->textdomain = 'news';
 
-		$widget_ops = array( 'classname' => 'image-stream', 'description' => __( 'Displays image thumbnails in a gallery-like format.', $this->textdomain ) );
+		$widget_ops = array( 'classname' => 'image-stream', 'description' => __( 'Displays image thumbnails in a gallery-like format.', 'news' ) );
 		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => "{$this->prefix}-image-stream" );
-		$this->WP_Widget( "{$this->prefix}-image-stream", __( 'News: Image Stream', $this->textdomain ), $widget_ops, $control_ops );
+		$this->WP_Widget( "{$this->prefix}-image-stream", __( 'News: Image Stream', 'news' ), $widget_ops, $control_ops );
 	}
 
 	/**
@@ -57,7 +55,7 @@ class News_Widget_Image_Stream extends WP_Widget {
 				get_the_image( array( 'size' => 'thumbnail' ) );
 			}
 		} else {
-			echo '<p>' . __( 'There are currently no images found.', $this->textdomain ) . '</p>';
+			echo '<p>' . __( 'There are currently no images found.', 'news' ) . '</p>';
 		}
 
 		echo '</div>';
@@ -88,18 +86,18 @@ class News_Widget_Image_Stream extends WP_Widget {
 
 		//Defaults
 		$defaults = array(
-			'title' => __( 'Image Stream', $this->textdomain ),
+			'title' => __( 'Image Stream', 'news' ),
 			'posts_per_page' => 6,
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<div class="hybrid-widget-controls columns-1">
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', $this->textdomain ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'posts_per_page' ); ?>"><?php _e( 'Limit:', 'news' ); ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'posts_per_page' ); ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ); ?>" value="<?php echo esc_attr( $instance['posts_per_page'] ); ?>" />
 		</p>
 		</div>
