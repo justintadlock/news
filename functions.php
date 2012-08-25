@@ -20,7 +20,7 @@
  *
  * @package News
  * @subpackage Functions
- * @version 0.2.0
+ * @version 0.3.0
  * @author DevPress <contact@devpress.com>
  * @copyright Copyright (c) 2010 - 2011, DevPress LLC.
  * @link http://devpress.com/themes/news
