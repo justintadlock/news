@@ -249,16 +249,17 @@ blockquote {
 	}
 
 /* Special icons for menu items. */
-/* Users can give a CSS Class to a menu item in the Menus screen in the admin. If no class was given,
- * default to the generic icon. */
+#menu-secondary li.loginout {  /* This item is automatically added by the theme. */
+	background: url(images/menu-secondary-icon-key.png) no-repeat 15px 13px;
+	}
+
+/* Removed in 0.3.0. Copy images and CSS into your child theme to use these. */
+/**
 #menu-secondary li.about {
 	background: url(images/menu-secondary-icon-person.png) no-repeat 15px 14px;
 	}
 #menu-secondary li.contact {
 	background: url(images/menu-secondary-icon-envelope.png) no-repeat 15px 14px;
-	}
-#menu-secondary li.loginout {  /* This item is automatically added by the theme. */
-	background: url(images/menu-secondary-icon-key.png) no-repeat 15px 13px;
 	}
 #menu-secondary li.about:hover, #menu-secondary li.about.sfHover {
 	background: #111 url(images/menu-secondary-icon-person.png) no-repeat 15px 14px;
@@ -269,6 +270,7 @@ blockquote {
 #menu-secondary li.loginout:hover, #menu-secondary li.loginout.sfHover {
 	background: #111 url(images/menu-secondary-icon-key.png) no-repeat 15px 13px;
 	}
+/**/
 
 #menu-secondary li a {
 	padding: 13px 15px 14px 14px;
