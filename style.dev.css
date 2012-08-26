@@ -553,12 +553,10 @@ blockquote {
 	overflow: hidden;
 	width: 980px;
 	height: 50px;
+	padding: 18px 0 0 20px;
 	font: normal normal normal 11px/11px Arial, Verdana, sans-serif;
 	color: #8f8f8f;
 	background: url(images/bg-breadcrumb.jpg) no-repeat;
-	}
-.breadcrumb-trail {
-	padding: 18px 0 0 20px;
 	}
 .breadcrumbs .sep {
 	display: inline-block;
