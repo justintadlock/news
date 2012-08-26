@@ -64,7 +64,7 @@ function news_theme_setup() {
 	add_theme_support( 'hybrid-core-theme-settings', array( 'about', 'footer' ) );
 	add_theme_support( 'hybrid-core-seo' );
 	add_theme_support( 'hybrid-core-template-hierarchy' );
-	add_theme_support( 'hybrid-core-drop-downs' );
+	add_theme_support( 'hybrid-core-javascript', array( 'drop-downs' ) );
 
 	/* Add theme support for extensions. */
 	add_theme_support( 'dev-stylesheet' );
