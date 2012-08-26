@@ -1,14 +1,15 @@
 <?php
 /**
- * Video Sidebar Template
- *
- * The Slideshow sidebar first checks for an active sidebar of 'utility-slideshow'.  If this sidebar isn't active, it 
- * displays a tabbed recent/popular list of slideshows.  The 'utility-slideshow' sidebar isn't registered by default.  
- * If you want to use it, you must register a sidebar with that specific ID.
+ * Slideshow Sidebar Template
  *
  * @package News
  * @subpackage Template
+ * @since 0.1.0
+ * @deprecated 0.3.0 Please include this template in your child theme if you plan to continue using it.
  */
+
+/* Deprecated file in version 0.3.0. */
+_deprecated_file( basename( __FILE__ ), '0.3.0', null, sprintf( __( 'Please copy the %s template from this theme into your child theme folder.', 'news' ), basename( __FILE__ ) ) );
 
 if ( is_active_sidebar( 'slideshow' ) ) : ?>
 

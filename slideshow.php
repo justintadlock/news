@@ -4,7 +4,12 @@
  *
  * @package News
  * @subpackage Template
+ * @since 0.1.0
+ * @deprecated 0.3.0 Please include this template in your child theme if you plan to continue using it.
  */
+
+/* Deprecated file in version 0.3.0. */
+_deprecated_file( basename( __FILE__ ), '0.3.0', null, sprintf( __( 'Please copy the %s template from this theme into your child theme folder.', 'news' ), basename( __FILE__ ) ) );
 
 get_header(); ?>
 
