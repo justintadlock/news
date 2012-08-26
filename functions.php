@@ -47,11 +47,11 @@ function news_theme_setup() {
 	$prefix = hybrid_get_prefix();
 
 	/* Load shortcodes file. */
-	require_once( trailingslashit( THEME_DIR ) . 'functions/shortcodes.php' );
+	require_once( trailingslashit( THEME_DIR ) . 'includes/shortcodes.php' );
 
 	/* Load admin functions. */
 	if ( is_admin() )
-		require_once( trailingslashit( THEME_DIR ) . 'functions/admin.php' );
+		require_once( trailingslashit( THEME_DIR ) . 'includes/admin.php' );
 
 	/* Add theme support for WordPress features. */
 	add_theme_support( 'automatic-feed-links' );
@@ -145,16 +145,16 @@ function news_register_widgets() {
 
 	/* Load the popular tabs widget. */
 	if ( current_theme_supports( 'entry-views' ) ) {
-		require_once( trailingslashit( THEME_DIR ) . 'classes/widget-popular-tabs.php' );
+		require_once( trailingslashit( THEME_DIR ) . 'includes/widget-popular-tabs.php' );
 		register_widget( 'News_Widget_Popular_Tabs' );
 	}
 
 	/* Load the image stream widget. */
-	require_once( trailingslashit( THEME_DIR ) . 'classes/widget-image-stream.php' );
+	require_once( trailingslashit( THEME_DIR ) . 'includes/widget-image-stream.php' );
 	register_widget( 'News_Widget_Image_Stream' );
 
 	/* Load the newsletter widget. */
-	require_once( trailingslashit( THEME_DIR ) . 'classes/widget-newsletter.php' );
+	require_once( trailingslashit( THEME_DIR ) . 'includes/widget-newsletter.php' );
 	register_widget( 'News_Widget_Newsletter' );
 }
 
