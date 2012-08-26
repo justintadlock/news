@@ -33,7 +33,9 @@
 
 			<div class="wrap">
 
-				<?php echo apply_atomic_shortcode( 'footer_content', hybrid_get_setting( 'footer_insert' ) ); ?>
+				<div class="footer-content">
+					<?php hybrid_footer_content(); ?>
+				</div><!-- .footer-content -->
 
 				<?php do_atomic( 'footer' ); // Footer hook ?>
 
