@@ -519,16 +519,19 @@ blockquote {
 	text-indent: -9999em;
 	background: url(images/primary-menu-arrows.png) no-repeat 0 0;
 	}
-#menu-primary li.sfHover .sf-sub-indicator {
+#menu-primary li:hover .sf-sub-indicator {
 	background-position: 0 -9px;
 	}
-#menu-primary li ul li .sf-sub-indicator {
+#menu-primary li li .sf-sub-indicator,
+#menu-primary li:hover li .sf-sub-indicator,
+#menu-primary li li:hover li .sf-sub-indicator {
 	right: 20px;
 	height: 9px;
-	background-position: 0 -18px !important;
+	background-position: 0 -18px;
 	}
-#menu-primary li ul li.sfHover .sf-sub-indicator {
-	background-position: 0 -27px !important;
+#menu-primary li li:hover .sf-sub-indicator,
+#menu-primary li li li:hover .sf-sub-indicator {
+	background-position: 0 -27px;
 	}
 
 /**
