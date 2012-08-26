@@ -5,7 +5,7 @@
  * Pulls post thumbnails by category or tag.
  *
  * @package News
- * @subpackage Classes
+ * @subpackage Includes
  * @since 0.1.0
  */
 

@@ -6,8 +6,8 @@
  * jQuery UI Tabs feature.
  *
  * @package News
- * @subpackage Classes
- * @since 0.1
+ * @subpackage Includes
+ * @since 0.1.0
  */
 
 class News_Widget_Popular_Tabs extends WP_Widget {

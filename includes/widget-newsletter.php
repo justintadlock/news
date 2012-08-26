@@ -5,7 +5,7 @@
  * Provides a subscribe form for integration with the Google/Feedburner service.
  *
  * @package News
- * @subpackage Classes
+ * @subpackage Includes
  * @since 0.1.0
  */
 

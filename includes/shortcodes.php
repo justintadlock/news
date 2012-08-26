@@ -3,7 +3,8 @@
  * Additional shortcodes for use within the theme.
  *
  * @package News
- * @subpackage Functions
+ * @subpackage Includes
+ * @since 0.1.0
  */
 
 /**

@@ -3,9 +3,11 @@
  * Admin functions.
  *
  * @package News
- * @subpackage Functions
+ * @subpackage Includes
+ * @since 0.1.0
  */
 
+/* Set up the admin functionality. */
 add_action( 'admin_menu', 'news_admin_setup', 11 );
 
 /**
