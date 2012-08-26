@@ -249,8 +249,12 @@ blockquote {
 	}
 
 /* Special icons for menu items. */
-#menu-secondary li.loginout {  /* This item is automatically added by the theme. */
+#menu-secondary li.loginout,
+#menu-secondary li.loginout:hover {  /* This item is automatically added by the theme. */
 	background: url(images/menu-secondary-icon-key.png) no-repeat 15px 13px;
+	}
+#menu-secondary li.loginout:hover {
+	background-color: #111;
 	}
 
 /* Removed in 0.3.0. Copy images and CSS into your child theme to use these. */
