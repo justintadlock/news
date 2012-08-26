@@ -35,7 +35,7 @@ function news_entry_shortlink_popup_shortcode() {
 	if ( empty( $shortlink ) )
 		return '';
 
-	$id = 'shortlink-' . get_the_ID();
+	$id = sanitize_html_class( 'shortlink-' . get_the_ID() );
 	$title = sprintf( __( "Shortlink for '%s'", 'news' ), get_the_title() );
 	$out = '<a class="tips shortlink hide-if-no-js" rel="#' . $id . '" title="' . esc_attr( $title ) . '">' . __( 'Shortlink', 'news' ) . '</a>';
 	$out .= ' <div id="' . $id . '" class="tip hide">';
