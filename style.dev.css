@@ -778,6 +778,19 @@ h3#cluetip-title {
 	}
 
 /* Pagination. */
+.navigation-links {
+	overflow: hidden;
+	clear: both;
+	margin: 0 20px;
+	padding: 20px 0;
+	}
+.navigation-links .previous {
+	float: left;
+	}
+.navigation-links .next {
+	float: right;
+	text-align: right;
+	}
 .pagination, .page-links {
 	clear: both;
 	font-size: 12px;
