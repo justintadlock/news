@@ -58,7 +58,7 @@
 
 			<?php if ( !empty( $description ) ) {
 				$avatar = get_avatar( get_the_author_meta( 'user_email', $id ), '100', '', get_the_author_meta( 'display_name', $id ) );
-				echo '<div class="loop-description">' . $avatar . $description . '</div>';
+				echo '<div class="loop-description">' . $avatar . wpautop( $description ) . '</div>';
 			} ?>
 
 		</div><!-- .loop-meta -->
