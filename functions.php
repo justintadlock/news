@@ -239,6 +239,7 @@ function news_get_current_comments_page() {
  *
  * @since 0.2.0
  * @param array $args The arguments for the comments form.
+
  */
 function news_comment_form_defaults( $args ) {
 
@@ -343,6 +344,36 @@ function news_get_post_by_meta( $meta_key = '', $meta_value = '' ) {
 
 	return false;
 }
+
+/**
+ * This function prohibits that wordpress stripes out rel tags
+ *
+ */
+function allow_rel() {
+	global $allowedtags;
+	$allowedtags['a']['rel'] = array ();
+}
+add_action( 'wp_loaded', 'allow_rel' );
+
+/**
+ * Give the user the posibility to add a link to a Google+ profile 
+ * to their author page.
+ */
+function add_google_profile( $contactmethods ) {
+	$contactmethods['google_profile'] = 'Google Profile <abbr title="Uniform Resource Locator">URL</abbr>';
+	return $contactmethods;
+}
+add_filter( 'user_contactmethods', 'add_google_profile', 10, 1);
+
+/**
+ * Give the user the posibility to add a link to a Twitter profile 
+ * to their author page.
+ */
+function add_twitter_profile( $contactmethods ) {
+	$contactmethods['twitter_profile'] = 'Twitter Profile <abbr title="Uniform Resource Locator">URL</abbr>';
+	return $contactmethods;
+}
+add_filter( 'user_contactmethods', 'add_twitter_profile', 10, 1);
 
 /* == Functions removed in version 0.3 == */
 

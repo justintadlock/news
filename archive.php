@@ -34,7 +34,7 @@ get_header(); ?>
 
 						<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
 
-						<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">[entry-published] [entry-comments-link] [entry-popup-shortlink] [entry-edit-link before=" | "]</div>' ); ?>
+						<?php echo apply_atomic_shortcode( 'byline', '<div class="byline" rel="author">[entry-published] [entry-comments-link] [entry-popup-shortlink] [entry-edit-link before=" | "]</div>' ); ?>
 
 						<div class="entry-summary">
 							<?php the_excerpt(); ?>
