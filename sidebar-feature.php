@@ -40,7 +40,7 @@ if ( is_active_sidebar( 'feature' ) ) : ?>
 
 						<?php echo apply_atomic_shortcode( 'entry_title', the_title( '<h4 class="entry-title"><a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '" rel="bookmark">', '</a></h4>', false ) ); ?>
 
-						<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">[entry-published]</div>' ); ?>
+						<?php echo apply_atomic_shortcode( 'byline', '<div class="byline" rel="author">[entry-published]</div>' ); ?>
 
 					</div><!-- .hentry -->
 
