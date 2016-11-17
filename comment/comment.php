@@ -1,10 +1,10 @@
 <li <?php hybrid_attr( 'comment' ); ?>>
 
 	<article>
-		<?php extant_comment_parent_link(
+		<?php hybrid_comment_parent_link(
 			array(
 				'depth'  => 3,
-				'text'   => __( 'In reply to %s', 'extant' ),
+				'text'   => __( 'In reply to %s', 'news' ),
 				'before' => '<div class="comment-parent">',
 				'after'  => '</div>'
 			)

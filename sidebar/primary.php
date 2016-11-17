@@ -4,7 +4,7 @@
 
 		<h3 id="sidebar-primary-title" class="screen-reader-text"><?php
 			// Translators: %s is the sidebar name. This is the sidebar title shown to screen readers.
-			printf( _x( '%s Sidebar', 'sidebar title', 'stargazer' ), hybrid_get_sidebar_name( 'primary' ) );
+			printf( _x( '%s Sidebar', 'sidebar title', 'news' ), hybrid_get_sidebar_name( 'primary' ) );
 		?></h3>
 
 		<?php if ( is_active_sidebar( 'primary' ) ) : // If the sidebar has widgets. ?>
@@ -13,7 +13,7 @@
 
 		<?php else : // If the sidebar has no widgets. ?>
 
-			<?php if ( stargazer_widget_exists( 'WP_Widget_Categories' ) ) : ?>
+			<?php if ( hybrid_widget_exists( 'WP_Widget_Categories' ) ) : ?>
 
 				<?php the_widget(
 					'WP_Widget_Categories',
@@ -28,7 +28,7 @@
 
 			<?php endif; ?>
 
-			<?php if ( stargazer_widget_exists( 'WP_Widget_Tag_Cloud' ) ) : ?>
+			<?php if ( hybrid_widget_exists( 'WP_Widget_Tag_Cloud' ) ) : ?>
 
 				<?php the_widget(
 					'WP_Widget_Tag_Cloud',
@@ -43,7 +43,7 @@
 
 			<?php endif; ?>
 
-			<?php if ( stargazer_widget_exists( 'WP_Widget_Meta' ) ) : ?>
+			<?php if ( hybrid_widget_exists( 'WP_Widget_Meta' ) ) : ?>
 
 				<?php the_widget(
 					'WP_Widget_Meta',
