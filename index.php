@@ -11,44 +11,27 @@
 
 get_header(); ?>
 
-	<?php do_atomic( 'before_content' ); // Before content hook ?>
+	<div id="content" class="site-content">
 
-	<div id="content">
+		<div class="wrap">
 
-		<?php do_atomic( 'open_content' ); // Open content hook ?>
+	<?php if ( ! is_front_page() && hybrid_is_plural() ) : // If viewing a multi-post page ?>
 
-		<div class="hfeed">
+		<?php locate_template( array( 'misc/loop-meta.php' ), true ); // Loads the misc/loop-meta.php template. ?>
 
-			<?php get_template_part( 'loop-meta' ); ?>
+	<?php endif; // End check for multi-post page. ?>
 
 			<?php if ( have_posts() ) : ?>
 
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php do_atomic( 'before_entry' ); // Before entry hook ?>
+					<?php hybrid_get_content_template(); ?>
 
-					<div id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
+			<?php if ( is_singular() ) : // If viewing a single post/page/CPT. ?>
 
-						<?php do_atomic( 'open_entry' ); // Open entry hook ?>
+				<?php comments_template( '', true ); // Loads the comments.php template. ?>
 
-						<?php echo apply_atomic_shortcode( 'entry_utility', '<div class="entry-utility">' . __( '[entry-popup-shortlink]', 'news' ) . '</div>' ); ?>
-
-						<?php echo apply_atomic_shortcode( 'entry_title', '[entry-title]' ); ?>
-
-						<?php echo apply_atomic_shortcode( 'byline', '<div class="byline">' . __( 'By [entry-author] on [entry-published] [entry-terms taxonomy="category" before=" in "] [entry-edit-link before=" | "]', 'news' ) . '</div>' ); ?>
-
-						<div class="entry-content">
-							<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'news' ) ); ?>
-							<?php wp_link_pages( array( 'before' => '<p class="page-links">' . __( 'Pages:', 'news' ), 'after' => '</p>' ) ); ?>
-						</div><!-- .entry-content -->
-
-						<?php echo apply_atomic_shortcode( 'entry_meta', '<div class="entry-meta">' . __( '<span class="share">Share this on:</span> [entry-mixx-link] [entry-delicious-link] [entry-digg-link] [entry-facebook-link] [entry-twitter-link]', 'news' ) . '</div>' ); ?>
-
-						<?php do_atomic( 'close_entry' ); // Close entry hook ?>
-
-					</div><!-- .hentry -->
-
-					<?php do_atomic( 'after_entry' ); // After entry hook ?>
+			<?php endif; // End check for single post. ?>
 
 				<?php endwhile; ?>
 
@@ -56,12 +39,8 @@ get_header(); ?>
 
 		</div><!-- .hfeed -->
 
-		<?php do_atomic( 'close_content' ); // Close content hook ?>
-
-		<?php get_template_part( 'loop-nav' ); ?>
+		<?php locate_template( array( 'misc/loop-nav.php' ), true ); // Loads the misc/loop-nav.php template. ?>
 
 	</div><!-- #content -->
-
-	<?php do_atomic( 'after_content' ); // After content hook ?>
 
 <?php get_footer(); ?>

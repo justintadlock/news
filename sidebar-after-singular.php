@@ -2,7 +2,7 @@
 /**
  * After Singular Sidebar Template
  *
- * The After Singular sidebar template houses the HTML used for the 'Utility: After Singular' 
+ * The After Singular sidebar template houses the HTML used for the 'Utility: After Singular'
  * sidebar.  If widgets are present, they will be displayed.  If no widgets are present and the reader
  * is viewing a singular post, a tabbed list of related posts will be displayed by recent/popular.
  *
@@ -83,7 +83,7 @@ if ( is_active_sidebar( 'after-singular' ) ) : ?>
 
 							<?php the_title( '<li><a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '">', '</a></li>' ); ?>
 
-						<?php endwhile; wp_reset_query(); ?>
+						<?php endwhile; wp_reset_postdata(); ?>
 
 						</ul>
 

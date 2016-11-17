@@ -1,21 +1,21 @@
 <?php
 /**
- * The functions file is used to initialize everything in the theme.  It controls how the theme is loaded and 
- * sets up the supported features, default actions, and default filters.  If making customizations, users 
- * should create a child theme and make changes to its functions.php file (not this one).  Friends don't let 
+ * The functions file is used to initialize everything in the theme.  It controls how the theme is loaded and
+ * sets up the supported features, default actions, and default filters.  If making customizations, users
+ * should create a child theme and make changes to its functions.php file (not this one).  Friends don't let
  * friends modify parent theme files. ;)
  *
  * Child themes should do their setup on the 'after_setup_theme' hook with a priority of 11 if they want to
  * override parent theme features.  Use a priority of 9 if wanting to run before the parent theme.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License version 2, as published by the Free Software Foundation.  You may NOT assume 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License version 2, as published by the Free Software Foundation.  You may NOT assume
  * that you can use any other version of the GPL.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * You should have received a copy of the GNU General Public License along with this program; if not, write 
+ * You should have received a copy of the GNU General Public License along with this program; if not, write
  * to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  * @package News
@@ -27,6 +27,62 @@
  * @link http://themehybrid.com/themes/news
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
+
+// Extending an idea from Jose Castaneda. This is a small script for loading Google fonts
+// with an easy method for adding/removing/editing the fonts loaded via child theme.  This
+// is a rough draft of an idea.  It might be worth exploring the idea of builing a full script.
+//
+// @link http://blog.josemcastaneda.com/2016/02/29/adding-removing-fonts-from-a-theme/
+
+/* === Usage === */
+
+add_action( 'wp_enqueue_scripts', 'themeslug_add_fonts' );
+
+function themeslug_add_fonts() {
+
+	$family = array(
+		'lato'    => 'Lato',
+		'oswald' => 'Oswald:400,700',
+		'lobster-two' => 'Lobster Two:700italic'
+	);
+
+	$subset  = array( 'latin', 'latin-ext' );
+
+	themeslug_enqueue_font( 'news', $family, $subset );
+}
+
+/* === Helper Functions === */
+
+// Note that this could be further extended to have dequeue, register, and unregister
+// wrappper functions (just wrappers for `wp_*_style()`).
+function themeslug_enqueue_font( $handle, $family = array(), $subset = array() ) {
+
+	$url = themeslug_create_font_url( $handle, $family, $subset );
+
+	if ( $url )
+		wp_enqueue_style( $handle, $url );
+}
+
+function themeslug_create_font_url( $handle, $family, $subset ) {
+
+	$url    = '';
+	$args   = array();
+
+	$family = apply_filters( "{$handle}_font_family", $family );
+	$subset = apply_filters( "{$handle}_font_subset", $subset );
+
+	if ( $family ) {
+
+		$args['family'] = urlencode( implode( '|', $family ) );
+
+		if ( $subset )
+			$args['subset'] = urlencode( implode( ',', $subset ) );
+
+		$url = add_query_arg( $args, 'https://fonts.googleapis.com/css' );
+	}
+
+	return apply_filters( "{$handle}_font_url", $url );
+}
 
 /* Load the core theme framework. */
 require_once( trailingslashit( get_template_directory() ) . 'library/hybrid.php' );
@@ -43,45 +99,21 @@ add_action( 'after_setup_theme', 'news_theme_setup' );
  */
 function news_theme_setup() {
 
-	/* Get action/filter hook prefix. */
-	$prefix = hybrid_get_prefix();
-
-	/* Load shortcodes file. */
-	require_once( trailingslashit( THEME_DIR ) . 'includes/shortcodes.php' );
-
-	/* Load admin functions. */
-	if ( is_admin() )
-		require_once( trailingslashit( THEME_DIR ) . 'includes/admin.php' );
-
 	/* Add theme support for WordPress features. */
 	add_theme_support( 'automatic-feed-links' );
 
-	/* Add theme support for core framework features. */
-	add_theme_support( 'hybrid-core-menus', array( 'primary', 'secondary', 'subsidiary' ) );
-	add_theme_support( 'hybrid-core-sidebars', array( 'primary', 'secondary', 'header', 'after-singular' ) );
-	add_theme_support( 'hybrid-core-widgets' );
-	add_theme_support( 'hybrid-core-shortcodes' );
-	add_theme_support( 'hybrid-core-theme-settings', array( 'about', 'footer' ) );
-	add_theme_support( 'hybrid-core-seo' );
-	add_theme_support( 'hybrid-core-template-hierarchy' );
-	add_theme_support( 'hybrid-core-javascript', array( 'drop-downs' ) );
 
-	/* Add theme support for extensions. */
-	add_theme_support( 'dev-stylesheet' );
-	add_theme_support( 'loop-pagination' );
+	add_theme_support( 'hybrid-core-template-hierarchy' );
+
 	add_theme_support( 'get-the-image' );
-	add_theme_support( 'entry-views' );
 	add_theme_support( 'breadcrumb-trail' );
 	add_theme_support( 'cleaner-gallery' );
-
-	/* Register shortcodes. */
-	add_action( 'init', 'news_register_shortcodes' );
 
 	/* Register new image sizes. */
 	add_action( 'init', 'news_register_image_sizes' );
 
 	/* Register additional widgets. */
-	add_action( 'widgets_init', 'news_register_widgets' );
+	//add_action( 'widgets_init', 'news_register_widgets' );
 
 	/* Load JavaScript. */
 	add_action( 'wp_enqueue_scripts', 'news_enqueue_script' );
@@ -123,6 +155,12 @@ function news_theme_setup() {
 
 	/* Additional default theme settings. */
 	add_filter( "{$prefix}_default_theme_settings", 'news_theme_settings' );
+
+	register_nav_menu( 'primary', __( 'Primary', 'news' ) );
+	register_nav_menu( 'social', __( 'Social', 'news' ) );
+	register_nav_menu( 'subsidiary', __( 'Subsidiary', 'news' ) );
+
+		add_image_size( 'extant-landscape',      750, 422, true );
 }
 
 /**
@@ -138,7 +176,7 @@ function news_register_image_sizes() {
 
 /**
  * Loads extra widget files and registers the widgets.
- * 
+ *
  * @since 0.1.0
  */
 function news_register_widgets() {
@@ -164,8 +202,13 @@ function news_register_widgets() {
  * @since 0.1.0
  */
 function news_enqueue_script() {
+
+	wp_enqueue_style( 'hybrid-one-five' );
+	wp_enqueue_style( 'hybrid-gallery' );
+	wp_enqueue_style( 'hybrid-style' );
+
 	wp_enqueue_script( 'jquery-ui-tabs' );
-	wp_enqueue_script( 'news-theme', trailingslashit( THEME_URI ) . 'js/news-theme.js', array( 'jquery' ), '20120825', true );
+	wp_enqueue_script( 'news-theme', trailingslashit( get_template_directory_uri() ) . 'js/theme.js', array( 'jquery' ), '20120825', true );
 }
 
 /**
@@ -249,7 +292,7 @@ function news_comment_form_defaults( $args ) {
 
 /**
  * Filters 'get_shortlink' because WordPress only creates shortlinks for the 'post' post type. We need
- * a shortlink for pages and attachments.  Note that this doesn't handle custom post types since we 
+ * a shortlink for pages and attachments.  Note that this doesn't handle custom post types since we
  * wouldn't really be making them "short" anyway.  Most users looking for good shortlink solutions should
  * use a shortlink plugin, especially when dealing with custom post types.
  *
@@ -328,7 +371,7 @@ function news_theme_settings( $settings ) {
 }
 
 /**
- * Function for grabbing a post ID by meta key and meta value.  We're using this in the sidebar-feature.php 
+ * Function for grabbing a post ID by meta key and meta value.  We're using this in the sidebar-feature.php
  * file to check if a page has been given the 'page-template-popular.php' page template.
  *
  * @since 0.1.0
@@ -343,6 +386,126 @@ function news_get_post_by_meta( $meta_key = '', $meta_value = '' ) {
 
 	return false;
 }
+
+/**
+ * Checks if a widget exists.  Pass in the widget class name.  This function is useful for
+ * checking if the widget exists before directly calling `the_widget()` within a template.
+ *
+ * @since  3.0.0
+ * @access public
+ * @param  string  $widget
+ * @return bool
+ */
+function stargazer_widget_exists( $widget ) {
+	global $wp_widget_factory;
+
+	return isset( $wp_widget_factory->widgets[ $widget ] );
+}
+
+function news_get_max_num_pages() {
+
+	return absint( $GLOBALS['wp_query']->max_num_pages );
+}
+
+function news_get_current_page() {
+
+	$page = absint( get_query_var( 'paged' ) );
+
+	return $page ? $page : 1;
+}
+
+add_filter( 'navigation_markup_template', 'news_navigation_markup_template' );
+
+function news_navigation_markup_template( $template ) {
+
+	return str_replace( 'screen-reader-text', 'page-count', $template );
+}
+
+function news_post_print_link() {
+	echo news_get_post_print_link();
+}
+
+function news_get_post_print_link() {
+
+	return '<a class="post-print-link hide-if-no-js" href="#">' . __( 'Print', 'news' ) . '</a>';
+}
+
+function news_post_email_link() {
+	echo news_get_post_email_link();
+}
+
+function news_get_post_email_link() {
+	$subject = urlencode( esc_attr( '[' . get_bloginfo( 'name' ) . ']' . the_title_attribute( 'echo=0' ) ) );
+	$body = urlencode( esc_attr( sprintf( __( 'Check out this post: %1$s', 'news' ), get_permalink( get_the_ID() ) ) ) );
+	return '<a class="post-email-link" href="mailto:?subject=' . $subject . '&amp;body=' . $body . '">' . __( 'Email', 'news' ) . '</a>';
+}
+/**
+ * Prints the comment parent link.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array   $args
+ * @return void
+ */
+function extant_comment_parent_link( $args = array() ) {
+
+	echo extant_get_comment_parent_link( $args );
+}
+
+/**
+ * Returns the comment parent link.
+ *
+ * @since  1.0.0
+ * @access public
+ * @param  array   $args
+ * @return string
+ */
+function extant_get_comment_parent_link( $args = array() ) {
+
+	$link = '';
+
+	$defaults = array(
+		'text'   => '%s', // Defaults to comment author.
+		'depth'  => 2,    // At what level should the link show.
+		'before' => '',
+		'after'  => ''
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	if ( $args['depth'] <= $GLOBALS['comment_depth'] ) {
+
+		$parent = get_comment()->comment_parent;
+
+		if ( 0 < $parent ) {
+
+			$url  = esc_url( get_comment_link( $parent ) );
+			$text = sprintf( $args['text'], get_comment_author( $parent ) );
+
+			$link = sprintf( '%s<a class="comment-parent-link" href="%s">%s</a>%s', $args['before'], $url, $text, $args['after'] );
+		}
+	}
+
+	return apply_filters( 'extant_comment_parent_link', $link, $args );
+}
+
+/* == Functions removed in 2.0.0 == */
+
+function news_admin_setup() {}
+function news_validate_theme_settings() {}
+function news_create_settings_meta_boxes() {}
+function news_home_template_theme_meta_box() {}
+function news_register_shortcodes() {}
+function news_entry_shortlink_popup_shortcode() {}
+function news_entry_print_link_shortcode() {}
+function news_entry_email_link_shortcode() {}
+function news_entry_mixx_link_shortcode() {}
+function news_entry_delicious_link_shortcode() {}
+function news_entry_digg_link_shortcode() {}
+function news_entry_facebook_link_shortcode() {}
+function news_entry_twitter_link_shortcode() {}
+function news_slideshow_shortcode() {}
+class News_Widget_Newsletter extends WP_Widget {}
 
 /* == Functions removed in version 0.3 == */
 
