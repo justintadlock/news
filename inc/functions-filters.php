@@ -10,6 +10,58 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+add_filter( 'single_template', 'news_single_template' );
+
+function news_single_template( $template ) {
+
+	if ( has_post_format( array( 'audio', 'gallery', 'video' ), get_queried_object_id() ) )
+		$template = locate_template( array( 'template-feature.php' ) );
+
+	return $template;
+}
+
+//add_filter( 'frontpage_template', 'news_front_page_template' );
+
+function news_front_page_template( $template ) {
+
+	if ( ! is_home() )
+		$template = locate_template( array( 'templates/front.php' ) );
+
+	return $template;
+}
+
+//add_filter( 'hybrid_attr_slideshow-wrap', 'news_slideshow_attr', 5 );
+
+function news_slideshow_attr() {
+	echo news_get_slideshow_attr();
+}
+
+function news_slideshow_excerpt_length() {
+
+	return 25;
+}
+
+function news_get_slideshow_attr() {
+
+	$out = '';
+
+	$attr = array(
+		'class'                       => 'wrap cycle-slideshow',
+		'data-cycle-slides'           => '.slideshow-item',
+		'data-cycle-timeout'          => '0',
+		'data-cycle-auto-height'      => 'container',
+		'data-cycle-prev'             => '.slideshow-prev',
+		'data-cycle-next'             => '.slideshow-next',
+		'data-cycle-caption'          => '.slideshow-count',
+		'data-cycle-caption-template' => "<span class='slide-count-num'>{{slideNum}}</span><span class='slide-count-sep'>/</span><span class='slide-count-total'>{{slideCount}}</span>"
+	);
+
+	foreach ( $attr as $key => $value )
+		$out .= sprintf( '%s="%s" ', $key, $value );
+
+	return trim( $out );
+}
+
 # Filter the image sizes to choose from.
 add_filter( 'image_size_names_choose', 'news_image_size_names_choose', 5 );
 

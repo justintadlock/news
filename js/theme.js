@@ -61,4 +61,36 @@ jQuery( window ).ready( function() {
 	// Hide separator for no comments span.
 	jQuery( 'span.comments-link' ).prev( '.sep' ).hide();
 
+	// Menu focus.
+	jQuery( '.menu li a' ).on( 'focus blur',
+		function() {
+			jQuery( this ).parents().toggleClass( 'focus' );
+		}
+	);
+
+	jQuery( '.menu li' ).on( 'hover', function() {
+		jQuery( this ).toggleClass( 'focus' );
+	} );
+
+	//
+	jQuery( '.news-tabs .news-tabs-content' ).hide();
+	jQuery( '.news-tabs .news-tabs-content:first-child' ).show();
+	jQuery( '.news-tabs-nav :first-child' ).attr( 'aria-selected', 'true' );
+
+	jQuery( '.news-tabs-nav li a' ).click(
+		function( j ) {
+			j.preventDefault();
+
+			var href = jQuery( this ).attr( 'href' );
+
+			jQuery( this ).parents( '.news-tabs' ).find( '.news-tabs-content' ).hide();
+
+			jQuery( this ).parents( '.news-tabs' ).find( href ).show();
+
+			jQuery( this ).parents( '.news-tabs' ).find( '.news-tabs-title' ).attr( 'aria-selected', 'false' );
+
+			jQuery( this ).parent().attr( 'aria-selected', 'true' );
+		}
+	);
+
 } );

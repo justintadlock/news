@@ -7,7 +7,7 @@
 			'theme_location'  => 'social',
 			'container'       => 'div',
 			'container_id'    => 'menu-social',
-			'container_class' => 'menu',
+			'container_class' => 'menu menu-social',
 			'menu_id'         => 'menu-social-items',
 			'menu_class'      => 'menu-items',
 			'depth'           => 1,

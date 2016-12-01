@@ -108,6 +108,7 @@ final class News_Theme {
 		require_once( $this->dir_path . 'inc/functions-icons.php'     );
 		require_once( $this->dir_path . 'inc/functions-options.php'   );
 		require_once( $this->dir_path . 'inc/functions-scripts.php'   );
+		require_once( $this->dir_path . 'inc/slideshow.php' );
 		require_once( $this->dir_path . 'inc/functions-template.php'  );
 
 		// Launch the Hybrid Core framework.
@@ -286,6 +287,7 @@ final class News_Theme {
 
 		// Register scripts.
 		wp_register_script( 'news', news_get_script_uri( 'theme' ), array( 'jquery' ), null, true );
+		wp_register_script( 'jquery-cycle', news_get_script_uri( 'jquery-cycle' ), array( 'jquery' ), null, true );
 
 		// Register fonts.
 		hybrid_register_font( 'news', news_get_locale_font_args() );

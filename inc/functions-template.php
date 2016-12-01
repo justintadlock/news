@@ -10,6 +10,39 @@
  * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
+function news_get_feature_recent_query_args() {
+
+	return array(
+		'posts_per_page' => 3,
+		'ignore_sticky_posts' => true,
+		'post__not_in' => array( get_queried_object_id() ),
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'post_format',
+				'field'    => 'slug',
+				'terms'    => 'post-format-' . get_post_format( get_queried_object_id() ),
+			),
+		)
+	);
+}
+
+function news_get_feature_popular_query_args() {
+
+	return array(
+		'posts_per_page' => 3,
+		'ignore_sticky_posts' => true,
+		'post__not_in' => array( get_queried_object_id() ),
+		'orderby' => 'comment_count',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'post_format',
+				'field'    => 'slug',
+				'terms'    => 'post-format-' . get_post_format( get_queried_object_id() ),
+			),
+		)
+	);
+}
+
 /**
  * Prints the the post comments link.  Wrapper for `comments_popup_link()`.  This function
  * doesn't output anything if there are no comments and comments are closed.
@@ -67,56 +100,6 @@ function news_get_post_format_permalink() {
 	return $format ? sprintf( '<a href="%s" class="post-format-permalink"><span class="screen-reader-text">%s</span></a>', esc_url( get_permalink() ), get_post_format_string( $format ) ) : '';
 }
 
-/**
- * Prints the comment parent link.
- *
- * @since  2.0.0
- * @access public
- * @param  array   $args
- * @return void
- */
-function news_comment_parent_link( $args = array() ) {
-
-	echo news_get_comment_parent_link( $args );
-}
-
-/**
- * Returns the comment parent link.
- *
- * @since  2.0.0
- * @access public
- * @param  array   $args
- * @return string
- */
-function news_get_comment_parent_link( $args = array() ) {
-
-	$link = '';
-
-	$defaults = array(
-		'text'   => '%s', // Defaults to comment author.
-		'depth'  => 2,    // At what level should the link show.
-		'before' => '',
-		'after'  => ''
-	);
-
-	$args = wp_parse_args( $args, $defaults );
-
-	if ( $args['depth'] <= $GLOBALS['comment_depth'] ) {
-
-		$parent = get_comment()->comment_parent;
-
-		if ( 0 < $parent ) {
-
-			$url  = esc_url( get_comment_link( $parent ) );
-			$text = sprintf( $args['text'], get_comment_author( $parent ) );
-
-			$link = sprintf( '%s<a class="comment-parent-link" href="%s">%s</a>%s', $args['before'], $url, $text, $args['after'] );
-		}
-	}
-
-	return apply_filters( 'news_comment_parent_link', $link, $args );
-}
-
 
 function news_get_max_num_pages() {
 
@@ -154,6 +137,30 @@ function news_get_post_email_link() {
 	$subject = urlencode( esc_attr( '[' . get_bloginfo( 'name' ) . ']' . the_title_attribute( 'echo=0' ) ) );
 	$body = urlencode( esc_attr( sprintf( __( 'Check out this post: %1$s', 'news' ), get_permalink( get_the_ID() ) ) ) );
 	return '<a class="post-email-link" href="mailto:?subject=' . $subject . '&amp;body=' . $body . '">' . __( 'Email', 'news' ) . '</a>';
+}
+
+function news_comment_policy_link() {
+
+	echo news_get_comment_policy_link();
+}
+
+function news_get_comment_policy_link() {
+
+	$link    = '';
+	$post_id = news_get_comment_policy_post_id();
+
+	if ( $post_id > 0 )
+		$link = sprintf( '<a href="%s" class="comment-policy-link">%s</a>', esc_url( get_permalink( $post_id ) ), esc_html( get_post_field( 'post_title', $post_id ) ) );
+
+	return apply_filters( 'news_get_comment_policy_link', $link, $post_id );
+}
+
+add_action( 'comment_form', 'news_output_comment_policy', 0 );
+
+function news_output_comment_policy() {
+
+	if ( $link = news_get_comment_policy_link() )
+		printf( '<p class="comment-form-policy">%s</p>', $link );
 }
 
 

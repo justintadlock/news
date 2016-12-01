@@ -72,4 +72,4 @@ Reddit</a>
 
 </article>
 
-<?php if ( is_singular() ) hybrid_post_terms( array( 'taxonomy' => 'post_tag', 'sep' => '' ) ); ?>
+<?php if ( is_singular( get_post_type() ) ) hybrid_post_terms( array( 'taxonomy' => 'post_tag', 'sep' => '' ) ); ?>

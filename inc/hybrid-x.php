@@ -26,6 +26,21 @@ function hybrid_get_theme_mod( $name, $default = false ) {
 	return get_theme_mod( $name, apply_filters( "hybrid_theme_mod_{$name}_default", $default ) );
 }
 
+function hybrid_has_body_class( $class ) {
+
+	return in_array( $class, get_body_class() );
+}
+
+function hybrid_has_post_class( $class, $post_id = null ) {
+
+	return in_array( $class, get_post_class( '', $post_id ) );
+}
+
+function hybrid_has_comment_class( $class, $comment_id = null, $post_id = null ) {
+
+	return in_array( $class, get_comment_class( '', $comment_id, $post_id ) );
+}
+
 /**
  * Checks if the current layout matches the layout to check against.
  *

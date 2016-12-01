@@ -24,19 +24,27 @@
 
 	<div id="body-container">
 
-		<?php hybrid_get_menu( 'social' ); ?>
+		<div class="header-wrap">
 
-		<div id="header">
+		<div id="header" class="site-header">
 
 			<div class="wrap">
 
-				<?php hybrid_site_title(); // Displays the site title ?>
+				<div class="site-branding">
+					<?php hybrid_site_title(); // Displays the site title ?>
+				</div>
+
+				<?php get_search_form(); ?>
 
 			</div><!-- .wrap -->
 
 		</div><!-- #header -->
 
 		<?php hybrid_get_menu( 'primary' ); // Loads the `menu/primary.php` template. ?>
+
+		<?php hybrid_get_menu( 'social' ); ?>
+
+		</div>
 
 		<div class="below-header">
 

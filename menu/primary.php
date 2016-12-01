@@ -8,7 +8,6 @@
 
 		<?php wp_nav_menu(
 			array(
-'depth' => 1,
 				'theme_location'  => 'primary',
 				'container'       => '',
 				'menu_id'         => 'menu-primary-items',

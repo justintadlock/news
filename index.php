@@ -37,9 +37,9 @@ get_header(); ?>
 
 			<?php endif; ?>
 
-		</div><!-- .hfeed -->
-
 		<?php locate_template( array( 'misc/loop-nav.php' ), true ); // Loads the misc/loop-nav.php template. ?>
+
+		</div><!-- .hfeed -->
 
 	</div><!-- #content -->
 
